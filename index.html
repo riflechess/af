@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>JFK Assassination Archival Search</title>
+<meta name="description" content="Full-text indexed, OCR'd search of the John F. Kennedy Assassination Documents, declassified in 2017.">
+<meta name="keywords" content="JFK, Kennedy, Assassination, CIA, FBI, Documents, Search, Full-text, fulltext, OCR.">
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-110079022-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-110079022-1');
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+
+<script>
+function doSearch() {
+	str = document.getElementById('txtSearch').value;
+	params = "searchterms="+str;
+    if (str.length == 0) { 
+        document.getElementById("searchResults").innerHTML = "Please enter a search term.";
+        return;
+    } else {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+		document.getElementById("searchResults").innerHTML = this.responseText;
+		 }
+        }
+        xmlhttp.open("GET", "script/search.php?"+params, true);
+   	xmlhttp.send(); 
+	}
+}
+</script>
+
+
+
+<style>
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, td, th {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+th {text-align: left;}
+body{
+	font: normal 12px Verdana, Arial, sans-serif;
+}
+p{
+    width: 800px;
+}
+a{text-decoration:none}
+
+form label {
+    display: inline-block;
+    width: 70px;
+}
+form input {
+	width: 400px;
+}
+
+input[type=submit] {
+    width: 200px;
+}
+
+</style>
+</head>
+<body bgcolor="#FFFFFF">
+<a href="/"><img src="image/assassination-files-header.jpg"></a>
+<br><br>
+
+
+<h3>JFK Declassified Document Search</h3>
+<p>Search the fulltext archive of documents related to the assassination of John F. Kennedy, declassified in 2017. <br><br> These documents have been released in to the National Archives and we have OCR'd and fulltext indexed them to help navigating the 34K documents (approx. 278K pages).<br><br> 
+</p>
+
+<form action="javascript:doSearch();">
+<input id="txtSearch" type="text" name="searchterms" maxlength="100" title='e.g. mercenary, "tropicana casino", air*, "Candy Barr"'/>
+<br><input type="submit" value="Search" onsubmit="javascript:doSearch();"/>
+</form>
+<p>Search tips:  Use * for wildcard searches and quotes for an exact match (e.g. "tropicana casino").</p>
+<span id="searchResults"></span>
+
+
+
+<footer>
+<br><br><br><br><br><br><br><br><br>
+<p><i><b>Legal Disclaimer: </b>The information on the website is provided "as is".  Inqueries should always refer to the source content in the National Archives.</i>
+</p>
+<a href="about.html">about</a>
+</footer>
+</body>
+</html>
